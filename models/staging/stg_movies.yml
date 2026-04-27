@@ -1,0 +1,59 @@
+version: 2
+models:
+  - name: stg_movies
+    description: Staging model for movie-level attributes and performance metrics normalized from the raw movie source.
+    columns:
+      - name: movie_id
+        description: Unique identifier for a movie record.
+        data_type: integer
+      - name: title
+        description: Movie title.
+        data_type: varchar
+      - name: us_gross
+        description: Total box office gross in the United States in USD.
+        data_type: bigint
+      - name: worldwide_gross
+        description: Total worldwide box office gross in USD.
+        data_type: bigint
+      - name: us_dvd_sales
+        description: Total US DVD sales revenue in USD.
+        data_type: bigint
+      - name: production_budget
+        description: Estimated production budget in USD.
+        data_type: bigint
+      - name: release_date
+        description: Theatrical release date.
+        data_type: varchar
+      - name: release_year
+        description: Calendar year the movie was released.
+        data_type: integer
+      - name: mpaa_rating
+        description: MPAA age/content rating for the movie.
+        data_type: varchar
+      - name: running_time_min
+        description: Runtime of the movie in minutes.
+        data_type: integer
+      - name: distributor
+        description: Company responsible for distribution.
+        data_type: varchar
+      - name: source
+        description: Original data source for the movie record.
+        data_type: varchar
+      - name: major_genres
+        description: Primary genre classification(s) for the movie.
+        data_type: varchar
+      - name: creative_type
+        description: Creative format/category of the movie content.
+        data_type: varchar
+      - name: director
+        description: Director credited for the movie.
+        data_type: varchar
+      - name: rotten_tomatoes_rating
+        description: Rotten Tomatoes critic score for the movie.
+        data_type: integer
+      - name: imdb_rating
+        description: IMDb user rating for the movie.
+        data_type: double
+      - name: imdb_votes
+        description: Number of IMDb user votes used to calculate the IMDb rating.
+        data_type: integer

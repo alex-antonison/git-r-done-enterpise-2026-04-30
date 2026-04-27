@@ -1,0 +1,57 @@
+name: Update duckdb Prod Database
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dbt-run-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: Install python packages
+        run: pip install -r requirements.txt
+
+      - name: Delete existing prod db
+        run: rm -f database/prod/git_r_done_enterprises.duckdb
+
+      - name: Run dbt
+        run: dbt run --target prod
+
+      - name: pull any commits that were done mid-action
+        run: |
+          git stash
+          git pull --rebase
+          git stash pop
+
+      - name: Check if there are any changes
+        id: verify_diff
+        run: |
+          git add -A
+          git diff HEAD --quiet . || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: commit updated prod db to main
+        if: steps.verify_diff.outputs.changed == 'true'
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -am "Updated duckdb prod database"
+          git push

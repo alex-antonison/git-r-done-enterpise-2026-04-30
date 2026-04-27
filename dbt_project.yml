@@ -1,0 +1,29 @@
+name: "git_r_done_enterprises"
+version: "1.0.0"
+config-version: 2
+
+profile: "git_r_done_enterprises"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  git_r_done_enterprises:
+    marts:
+      +materialized: table
+    staging:
+      +materialized: table
+
+vars:
+  imdb_movies:
+    database: imdb_movies
+    schema: public
