@@ -39,3 +39,5 @@ Use a database client such as DBeaver to connect to the DuckDB database file loc
 If you are interested, you can tinker with the `streamlit_app.py` script and add some visualizations or other features to it.
 
 To run it, do `streamlit run streamlit_app.py`.
+
+Once merged, you can see the hosted app at [https://git-r-done-enterpise-2026-04-30.streamlit.app/](https://git-r-done-enterpise-2026-04-30.streamlit.app/)
